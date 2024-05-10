@@ -35,6 +35,12 @@ jobs:
       - name: Testing
         run: |
           CONTAINER_IDS=$(docker-compose ps -q)
+          echo ${CONTAINER_IDS}
           for CONTAINER_ID in $CONTAINER_IDS; do
-              docker exec $CONTAINER_ID bash -c "cd app; python manage.py test"
-            done
+            MANAGE_PY_EXISTS=$(docker exec $CONTAINER_ID bash -c 'test -f manage.py && echo true || echo false')
+            if [ "$MANAGE_PY_EXISTS" = "true" ]; then
+              docker exec $CONTAINER_ID bash -c "python manage.py test"
+            else
+              echo "Not an app container"
+            fi
+          done
