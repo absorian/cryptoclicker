@@ -23,22 +23,30 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Setting up Docker containers
         run: |
-          docker-compose up --build -d
+#          docker-compose up --build -d
+# Uncomment code above and delete codes in run below when docker-compose added
+          cd app
+          pip install -r requirements.txt
+          python manage.py migrate
+          python manage.py test
+          python manage.py runserver
 
-  test:
+# Uncomment part below when docker-compose added
 
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Testing
-        run: |
-          CONTAINER_IDS=$(docker-compose ps -q)
-          echo ${CONTAINER_IDS}
-          for CONTAINER_ID in $CONTAINER_IDS; do
-            MANAGE_PY_EXISTS=$(docker exec $CONTAINER_ID bash -c 'test -f manage.py && echo true || echo false')
-            if [ "$MANAGE_PY_EXISTS" = "true" ]; then
-              docker exec $CONTAINER_ID bash -c "python manage.py test"
-            else
-              echo "Not an app container"
-            fi
-          done
+#  test:
+#
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Testing
+#        run: |
+#          CONTAINER_IDS=$(docker-compose ps -q)
+#          echo ${CONTAINER_IDS}
+#          for CONTAINER_ID in $CONTAINER_IDS; do
+#            MANAGE_PY_EXISTS=$(docker exec $CONTAINER_ID bash -c 'test -f manage.py && echo true || echo false')
+#            if [ "$MANAGE_PY_EXISTS" = "true" ]; then
+#              docker exec $CONTAINER_ID bash -c "python manage.py test"
+#            else
+#              echo "Not an app container"
+#            fi
+#          done
