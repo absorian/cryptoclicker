@@ -1,12 +1,10 @@
 name: Django CI/CD
 
-# Uncomment code section below when all backend parts done
-
-#on:
-#  push:
-#    branches: [ "main" ]
-#  pull_request:
-#    branches: [ "main" ]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
