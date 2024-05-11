@@ -1,0 +1,46 @@
+name: Django CI/CD
+
+# Uncomment code section below when all backend parts done
+
+#on:
+#  push:
+#    branches: [ "main" ]
+#  pull_request:
+#    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [ 3.12 ]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Setting up Docker containers
+        run: |
+          docker-compose up --build -d
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Testing
+        run: |
+          CONTAINER_IDS=$(docker-compose ps -q)
+          echo ${CONTAINER_IDS}
+          for CONTAINER_ID in $CONTAINER_IDS; do
+            MANAGE_PY_EXISTS=$(docker exec $CONTAINER_ID bash -c 'test -f manage.py && echo true || echo false')
+            if [ "$MANAGE_PY_EXISTS" = "true" ]; then
+              docker exec $CONTAINER_ID bash -c "python manage.py test"
+            else
+              echo "Not an app container"
+            fi
+          done
