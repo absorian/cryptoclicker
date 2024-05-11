@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.start-container, .game-container, .leaderboard-container {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.start-button, .clicker-button {
+    font-size: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.score-board {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+.leaderboard-link {
+    margin-left: 20px;
+}
+
+.leaderboard-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+h1 { 
+    color: red;
+}

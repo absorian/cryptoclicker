@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Crypto Clicker</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="game-container">
+        <div class="score-board">
+            <span>Score: <span id="score">0</span></span>
+            <a href="{% url 'board' %}" class="leaderboard-link">Leaderboards</a>
+        </div>
+        <button id="clicker" class="clicker-button">Click Me!</button>
+        <button id="finish" class="finish-button">Finish Session</button>
+
+        <!-- Include CSRF token in the form -->
+        <form id="save-score" method="POST">
+            {% csrf_token %}
+            <input type="hidden" id="username" name="username">
+            <input type="hidden" id="score-input" name="score">
+        </form>
+    </div>
+
+    <script src="{% static 'game.js' %}"></script>
+</body>
+</html>
