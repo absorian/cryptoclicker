@@ -23,14 +23,11 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Setting up Docker containers
         run: |
-#          docker-compose up --build -d
-# Uncomment code above and delete codes in run below when docker-compose added
           cd app
           pip install -r requirements.txt
           python manage.py migrate
           python manage.py test
-          python manage.py runserver
-
+          python manage.py runserver & sleep 5
 # Uncomment part below when docker-compose added
 
 #  test:
