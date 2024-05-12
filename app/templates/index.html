@@ -9,8 +9,13 @@
 </head>
 <body>
     <div id="bg-ctn"></div>
-    <h1 id="title">CRYPTOCLICKER</h1>
-    <a href="/game" id="start-button">Begin</a>
+    <header>
+        <a href="/leaderboards" class="reg-button header-button invert-bg">leaderboard</a>
+        <h1 id="title">CRYPTOCLICKER</h1>
+        <a class="reg-button header-button invert-bg" style="visibility: hidden">about</a>
+    </header>
+    <a href="/game" id="center-button" class="reg-button">Begin</a>
+    
     <script defer src="{% static 'bg.js' %}"></script>
 </body>
 </html>

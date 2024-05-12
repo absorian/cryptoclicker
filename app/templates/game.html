@@ -4,26 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Play Crypto Clicker</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <title>Crypto Clicker Game</title>
+    <link rel="stylesheet" href="{%static 'styles.css' %}">
 </head>
 <body>
-    <div class="game-container">
-        <div class="score-board">
-            <span>Score: <span id="score">0</span></span>
-            <a href="{% url 'board' %}" class="leaderboard-link">Leaderboards</a>
-        </div>
-        <button id="clicker" class="clicker-button">Click Me!</button>
-        <button id="finish" class="finish-button">Finish Session</button>
+    <div id="bg-ctn"></div>
+    <header>
+        <a href="/leaderboards" class="reg-button header-button invert-bg">leaderboard</a>
+        <h1 id="title">CRPT 
+            <span id="score">:</span>
+        CLCK</h1>
+        <button id="finish" class="reg-button header-button invert-bg">claim</a>
+    </header>
 
-        <!-- Include CSRF token in the form -->
-        <form id="save-score" method="POST">
-            {% csrf_token %}
-            <input type="hidden" id="username" name="username">
-            <input type="hidden" id="score-input" name="score">
-        </form>
-    </div>
+    <button id="center-button" class="reg-button">Exec</a>
 
+    <form id="save-score" method="POST">
+        {% csrf_token %}
+        <input type="hidden" id="username" name="username">
+        <input type="hidden" id="score-input" name="score">
+    </form>
+
+    <script src="{% static 'bg.js' %}"></script>
     <script src="{% static 'game.js' %}"></script>
 </body>
 </html>
