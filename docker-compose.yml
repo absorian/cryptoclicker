@@ -1,14 +1,33 @@
 services:
-  django:
+  web1:
     build: ./app
-    container_name: django
     command: bash -c "
             python manage.py migrate
             && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - djsrc:/usr/src/app
-    ports:
-      - 8000:8000
+    # ports:
+    #   - 8000:8000
+    depends_on:
+      - pgdb
+
+  web2:
+    build: ./app
+    command: bash -c "
+            python manage.py migrate
+            && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - djsrc:/usr/src/app
+    depends_on:
+      - pgdb
+
+  web3:
+    build: ./app
+    command: bash -c "
+            python manage.py migrate
+            && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - djsrc:/usr/src/app
     depends_on:
       - pgdb
 
@@ -20,6 +39,17 @@ services:
     container_name: pgdb
     volumes:
       - pgdbdata:/var/lib/postgresql/data/
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - web1
+      - web2
+      - web3
 
 volumes:
   pgdbdata: null
