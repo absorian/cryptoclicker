@@ -10,8 +10,7 @@ jobs:
   build:
 
     runs-on:
-      - self-hosted
-      - label-1
+      - ubuntu-latest
     strategy:
       max-parallel: 4
       matrix:
@@ -25,27 +24,5 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Setting up Docker containers
         run: |
-          cd app
-          pip install -r requirements.txt
-          python manage.py migrate
-          python manage.py test clicker
-          python manage.py runserver & sleep 5
-# Uncomment part below when docker-compose added
-
-#  test:
-#
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - name: Testing
-#        run: |
-#          CONTAINER_IDS=$(docker-compose ps -q)
-#          echo ${CONTAINER_IDS}
-#          for CONTAINER_ID in $CONTAINER_IDS; do
-#            MANAGE_PY_EXISTS=$(docker exec $CONTAINER_ID bash -c 'test -f manage.py && echo true || echo false')
-#            if [ "$MANAGE_PY_EXISTS" = "true" ]; then
-#              docker exec $CONTAINER_ID bash -c "python manage.py test"
-#            else
-#              echo "Not an app container"
-#            fi
-#          done
+          docker-compose up --build -d
+          

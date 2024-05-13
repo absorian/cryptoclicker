@@ -37,8 +37,8 @@ services:
   pgdb:
     image: postgres
     env_file:
-    - path: ./app/cryptoclicker/.env
-      required: true
+      - ./app/cryptoclicker/.env
+    
     container_name: pgdb
     volumes:
       - pgdbdata:/var/lib/postgresql/data/
