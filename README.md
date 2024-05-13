@@ -4,6 +4,7 @@
 
 1. Clone repo
 2. Navigate inside app folder: `cd app`
-3. Set your values (specific for your running PostgreSQL) inside `cryptoclicker/.env`
-4. Migrate: `python manage.py migrate`
-5. Run server: `python manage.py runserver`
+3. Install dependencies: `pip install -r requirements.txt`
+4. Set your values (specific for your running PostgreSQL) inside `cryptoclicker/.env`
+5. Migrate: `python manage.py migrate`
+6. Run server: `python manage.py runserver`
