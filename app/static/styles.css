@@ -21,7 +21,7 @@ header {
     background: linear-gradient(0.25turn, rgba(165, 42, 42, 0), var(--accent-col), rgba(165, 42, 42, 0));
 
     margin: 0;
-    transform: translate(0, 200px);
+    transform: translate(0, 23vh);
 
     display: flex;
     justify-content: center;
@@ -107,6 +107,8 @@ header {
     filter: blur(100px);
     background: radial-gradient(circle at 50% 50%,rgba(76, 0, 255, 1), rgba(76, 0, 255, 0));
     opacity: 0.2;
+
+    z-index: -1;
 }
 
 #center-button {
