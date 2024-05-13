@@ -1,12 +1,24 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const clickerButton = document.getElementById('clicker');
+    const clickerButton = document.getElementById('center-button');
     const finishButton = document.getElementById('finish');
     const scoreDisplay = document.getElementById('score');
     let score = 0;
+    let cur_width = 100;
+
+    bounceEmojis()
+    finishButton.style.visibility = null
+    finishButton.disabled = true
 
     clickerButton.addEventListener('click', function() {
+        finishButton.disabled = false
         score++;
         scoreDisplay.textContent = score;
+        bounceEmojis()
+        scoreDisplay.style.color = `hsl(${getRandomInt(0, 256)} 120% 70%)`
+        if (score.toString().length > (score - 1).toString().length) {
+            cur_width += 56;
+            scoreDisplay.style.width = `${cur_width}px`
+        }
     });
 
     finishButton.addEventListener('click', function() {

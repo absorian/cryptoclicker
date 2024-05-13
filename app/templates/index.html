@@ -8,8 +8,14 @@
     <link rel="stylesheet" href="{%static 'styles.css' %}">
 </head>
 <body>
-    <div class="start-container">
-        <button onclick="location.href='game'" class="start-button">Start Playing</button>
-    </div>
+    <div id="bg-ctn"></div>
+    <header>
+        <a href="/leaderboards" class="reg-button header-button invert-bg">leaderboard</a>
+        <h1 id="title">CRYPTOCLICKER</h1>
+        <a class="reg-button header-button invert-bg" style="visibility: hidden">about</a>
+    </header>
+    <a href="/game" id="center-button" class="reg-button">Begin</a>
+    
+    <script defer src="{% static 'bg.js' %}"></script>
 </body>
 </html>

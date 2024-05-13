@@ -8,8 +8,12 @@
     <link rel="stylesheet" href="{%static 'styles.css' %}">
 </head>
 <body>
+    <header>
+        <a href="/leaderboards" class="reg-button header-button selected invert-bg">leaderboard</a>
+        <h1 id="title">CRYPTOCLICKER</h1>
+        <a href="javascript:history.back()" class="reg-button header-button invert-bg">back</a>
+    </header>
     <div class="leaderboard-container">
-        <h1>Leaderboard</h1>
         <table id="leaderboard-table">
             <thead>
                 <tr>
@@ -29,5 +33,6 @@
             </tbody>
         </table>
     </div>
+    <script defer src="{% static 'bg.js' %}"></script>
 </body>
 </html>
